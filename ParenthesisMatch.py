@@ -6,7 +6,7 @@ can validate only () [] {}
 
 strParenthesis = '(){}[]'
 
-dict= {
+dict = {
     '(': ')',
     '[': ']',
     '{': '}',
@@ -14,12 +14,8 @@ dict= {
 
 
 def MatchParenthesis(input: str) -> bool:
-    pass
-    # flag = False
-    # for i in range(0, len(strParenthesis)-1):
+    for i in range(0, len(input) - 1):
+            pass
 
-       
-            
-    # return flag
 
 print(MatchParenthesis(strParenthesis))
