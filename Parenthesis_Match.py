@@ -5,7 +5,7 @@ An input string is valid if:
 
 Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
- 
+
 
 Example 1:
 
@@ -19,7 +19,7 @@ Example 3:
 
 Input: s = "(]"
 Output: false
- 
+
 
 Constraints:
 
@@ -30,26 +30,26 @@ s consists of parentheses only '()[]{}'.
 
 
 dict = {
-        '(':')',
-        '[':']',
-        '{':'}'
-    }
-    
+    '(': ')',
+    '[': ']',
+    '{': '}'
+}
 
-def checkBrackets(inputStr:str) -> bool:
+
+def checkBrackets(inputStr: str) -> bool:
     '''
-    working solution 
+    working solution
     but does not work for nested brackets like {[]} returns false
     '''
-    
-    for i in range(0,len(inputStr)-1):
-        if(inputStr[i]=='('):
+
+    for i in range(0, len(inputStr)-1):
+        if(inputStr[i] == '('):
             if(inputStr[i+1] != dict['(']):
-                return False                
-        elif(inputStr[i]=='['):
+                return False
+        elif(inputStr[i] == '['):
             if(inputStr[i+1] != dict['[']):
                 return False
-        elif(inputStr[i]=='{'):
+        elif(inputStr[i] == '{'):
             if(inputStr[i+1] != dict['{']):
                 return False
     return True
@@ -57,20 +57,42 @@ def checkBrackets(inputStr:str) -> bool:
 
 inputString = '(){}[]'
 
-if(checkBrackets(inputString)):
-    print('valid parenthesis')
+# if(checkBrackets(inputString)):
+#     print('Valid parenthesis')
+# else:
+#     print('Invalid parenthesis')
 
 
-inputString2 = '{(){}[]}'
+mystack = []
+inputString2 = '{({}[])}'
 
-def checkBrackets2(inputStr:str) -> bool :
-    stack = []
-    for i in range(0,len(inputStr)-1):
-        if(inputStr[i] == '('):
-            stack.append(')')
-        elif(inputStr[i] == '['):
-            stack.append(']')
-        elif(inputStr[i] == '{'):
-            stack.append('}')
+
+
+
+def checkBrackets2(inputStr: str) -> bool:
+    doesMatch: bool = False
+    for i in range(0, len(inputStr)-1):
+        if inputStr[i] in dict.keys():
+            mystack.append(inputStr[i])
+        
+        if inputStr[i] in dict.values():
+            x = mystack.pop()
+            if(GetKey(inputStr[i]) == x):
+                doesMatch = True
+            else:
+                return False
+    
+    return doesMatch
+        
+def GetKey(val):
+   for key, value in dict.items():
+      if val == value:
+         return key
+
+if(checkBrackets2(inputString2)):
+    print('Valid parenthesis')
+else:
+    print('Invalid parenthesis')
+
 
 
